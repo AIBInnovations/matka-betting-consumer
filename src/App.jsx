@@ -27,13 +27,13 @@ function App() {
     <Router>
       <Routes>
         {/* Public Routes */}
-        <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
         <Route path="/" element={
           <>
           <Header />
           <HomePage />
           </>
       } />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
