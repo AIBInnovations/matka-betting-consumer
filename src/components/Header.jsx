@@ -43,7 +43,7 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <button
           aria-label="Toggle Sidebar"
-          className="material-icons-outlined text-3xl hover:text-purple-300 cursor-pointer"
+          className="material-icons-outlined text-3xl hover:text-purple-300 cursor-pointer invisible"
           onClick={toggleSidebar}
         >
           menu
@@ -68,7 +68,7 @@ const Header = () => {
           </div>
         ) : (
           <button
-            className="px-5 py-2 text-lg bg-purple-600 text-white rounded-lg font-bold cursor-pointer transition-colors duration-300 ease-in-out hover:bg-purple-500"
+            className="px-5 py-2 text-lg bg-purple-600 text-white rounded-lg font-bold cursor-pointer transition-colors duration-300 ease-in-out hover:bg-purple-500 invisible"
             onClick={() => navigate('/login')}
           >
             Login
