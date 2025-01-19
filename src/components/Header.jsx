@@ -43,7 +43,7 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <button
           aria-label="Toggle Sidebar"
-          className="material-icons-outlined text-3xl hover:text-purple-300 cursor-pointer invisible"
+          className="material-icons-outlined text-3xl hover:text-purple-300 cursor-pointer"
           onClick={toggleSidebar}
         >
           menu
