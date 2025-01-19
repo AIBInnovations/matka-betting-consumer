@@ -35,6 +35,7 @@ function App() {
       } />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
 
         {/* Private Routes */}
         <Route element={<PrivateRoute />}>
@@ -54,7 +55,6 @@ function App() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/help" element={<Help />}/>
           <Route path="/game-rates" element={<GameRates />}/>
-          <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
         </Route>
       </Routes>
     </Router>
