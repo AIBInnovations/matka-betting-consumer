@@ -20,6 +20,7 @@ import Contact from './pages/Contact';
 import Wallet from './pages/Wallet';
 import Help from './pages/Help';
 import GameRates from './pages/GameRates';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/help" element={<Help />}/>
           <Route path="/game-rates" element={<GameRates />}/>
+          <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
         </Route>
       </Routes>
     </Router>
