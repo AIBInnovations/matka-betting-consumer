@@ -68,7 +68,7 @@ const Header = () => {
           </div>
         ) : (
           <button
-            className="px-5 py-2 text-lg bg-purple-600 text-white rounded-lg font-bold cursor-pointer transition-colors duration-300 ease-in-out hover:bg-purple-500 invisible"
+            className="px-5 py-2 text-lg bg-purple-600 text-white rounded-lg font-bold cursor-pointer transition-colors duration-300 ease-in-out hover:bg-purple-500"
             onClick={() => navigate('/login')}
           >
             Login

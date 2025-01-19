@@ -57,13 +57,13 @@ const HomePage = () => {
       {/* Action Buttons */}
       <div className="flex justify-center items-center gap-4 mb-4">
         <button
-          className="text-sm font-medium py-2 px-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-lg shadow-md hover:from-red-800 hover:to-red-900 transition-colors duration-300 invisible"
+          className="text-sm font-medium py-2 px-4 bg-gradient-to-r from-red-700 to-red-900 text-white rounded-lg shadow-md hover:from-red-800 hover:to-red-900 transition-colors duration-300"
           onClick={() => navigate("/contact")}
         >
           📞 Contact Us
         </button>
         <button
-          className="text-sm font-medium py-2 px-4 bg-gradient-to-r from-yellow-500 to-yellow-700 text-white rounded-lg shadow-md hover:from-yellow-600 hover:to-yellow-800 transition-colors duration-300 invisible"
+          className="text-sm font-medium py-2 px-4 bg-gradient-to-r from-yellow-500 to-yellow-700 text-white rounded-lg shadow-md hover:from-yellow-600 hover:to-yellow-800 transition-colors duration-300"
           onClick={() => navigate('/add-funds')}
         >
           + Add Points
