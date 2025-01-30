@@ -215,13 +215,13 @@ const SingleDigit = () => {
       </div>
 
       {/* Input for digit and points */}
-      <div className="grid grid-cols-3 gap-3 mb-4 bg-white">
+      <div className="grid grid-cols-3 gap-3 mb-4">
         <input
           type="number"
           placeholder="Enter Digit"
           value={digit}
           onChange={(e) => setDigit(e.target.value)}
-          className="col-span-1 px-3 py-2 bg-gray-800 text-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600"
+          className="col-span-1 px-3 py-2 bg-white text-black rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600"
         />
         <input
           type="number"
