@@ -119,10 +119,16 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* WhatsApp Button */}
-      <a href="https://wa.me/917051098359" target="_blank" rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 bg-green-600 p-3 rounded-full text-white shadow-lg transition-all duration-300 hover:bg-green-700"
-        style={{ zIndex: 1000 }}
+      {/* WhatsApp Floating Button */}
+      <a
+        href="https://wa.me/917051098359"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 bg-green-600 p-4 rounded-full text-white shadow-lg hover:bg-green-700 transition-transform duration-300 transform hover:scale-110 flex items-center justify-center"
+        style={{
+          zIndex: 1000,
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+        }}
       >
         <FontAwesomeIcon icon={faWhatsapp} size="lg" />
       </a>
