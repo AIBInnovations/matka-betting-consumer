@@ -195,14 +195,14 @@ const DoublePana = () => {
           placeholder="Enter Double Pana (3-digit)"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="col-span-1 px-3 py-1 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-600"
+          className="col-span-1 px-3 py-1 bg-white text-black rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-600"
         />
         <input
           type="number"
           placeholder="Enter Points"
           value={points}
           onChange={(e) => setPoints(e.target.value)}
-          className="col-span-1 px-3 py-1 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-600"
+          className="col-span-1 px-3 py-1 bg-white text-black rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-600"
         />
         <button
           onClick={handleAddBet}

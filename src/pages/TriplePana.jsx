@@ -168,8 +168,8 @@ const TriplePana = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-3 mb-4">
-        <input type="text" placeholder="Enter Triple Pana (3-digit)" value={input} onChange={(e) => setInput(e.target.value)} className="col-span-1 px-3 py-2 bg-gray-800 text-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600" />
-        <input type="number" placeholder="Enter Points" value={points} onChange={(e) => setPoints(e.target.value)} className="col-span-1 px-3 py-2 bg-gray-800 text-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600" />
+        <input type="text" placeholder="Enter Triple Pana (3-digit)" value={input} onChange={(e) => setInput(e.target.value)} className="col-span-1 px-3 py-2 bg-white text-black rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600" />
+        <input type="number" placeholder="Enter Points" value={points} onChange={(e) => setPoints(e.target.value)} className="col-span-1 px-3 py-2 bg-white text-black rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600" />
         <button onClick={handleAddBet} className="col-span-1 bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-md font-bold text-sm transition duration-300">
           Add Bet
         </button>

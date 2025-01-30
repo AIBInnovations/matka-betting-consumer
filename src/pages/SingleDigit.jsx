@@ -228,7 +228,7 @@ const SingleDigit = () => {
           placeholder="Enter Points"
           value={points}
           onChange={(e) => setPoints(e.target.value)}
-          className="col-span-1 px-3 py-2 bg-gray-800 text-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600"
+          className="col-span-1 px-3 py-2 bg-white text-black rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600"
         />
         <button
           onClick={handleAddBet}
