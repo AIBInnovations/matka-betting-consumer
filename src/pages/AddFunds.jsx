@@ -12,20 +12,20 @@ const AddFunds = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const trimmedTransactionId = transactionId.trim();
     const parsedAmount = parseFloat(amount);
-
-    if (!trimmedTransactionId || isNaN(parsedAmount) || parsedAmount <= 0) {
-      setError('Amount and Transaction ID are required.');
+  
+    if (!trimmedTransactionId || isNaN(parsedAmount) || parsedAmount <= 0 || !receipt) {
+      setError('Amount, Transaction ID, and Receipt are required.');
       return;
     }
-
+  
     const formData = new FormData();
     formData.append('transactionId', trimmedTransactionId);
     formData.append('amount', parsedAmount);
     formData.append('receipt', receipt);
-
+  
     try {
       // API call to submit fund request
       const token = localStorage.getItem('token');
@@ -35,11 +35,11 @@ const AddFunds = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data', // This should be multipart/form-data when sending files
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
-
+  
       setMessage(response.data.message);
       setError('');
       setTransactionId('');
@@ -50,7 +50,7 @@ const AddFunds = () => {
       setMessage('');
       setError(err.response?.data?.message || 'Failed to submit fund request.');
     }
-  };
+  };  
 
   const handleReceiptChange = (e) => {
     setReceipt(e.target.files[0]);
@@ -129,7 +129,7 @@ const AddFunds = () => {
           {/* Receipt Upload */}
           <div>
             <label htmlFor="receipt" className="block text-sm font-medium mb-1">
-              Upload Receipt (optional):
+              Upload Receipt (Required):
             </label>
             <input
               type="file"
@@ -137,7 +137,11 @@ const AddFunds = () => {
               accept="image/*"
               onChange={handleReceiptChange}
               className="w-full bg-gray-700 text-white py-2 rounded-lg"
+              required
             />
+            {error && !receipt && (
+              <p className="text-red-500 text-sm mt-1">Receipt is required.</p>
+            )}
           </div>
 
           {/* Submit Button */}

@@ -215,7 +215,7 @@ const SingleDigit = () => {
       </div>
 
       {/* Input for digit and points */}
-      <div className="grid grid-cols-3 gap-3 mb-4">
+      <div className="grid grid-cols-3 gap-3 mb-4 bg-white">
         <input
           type="number"
           placeholder="Enter Digit"
