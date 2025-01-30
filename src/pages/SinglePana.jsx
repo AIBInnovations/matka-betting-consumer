@@ -235,7 +235,7 @@ const SinglePana = () => {
         onClick={handlePlaceBet}
         className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-md font-bold text-sm transition duration-300 mb-4"
       >
-        Place Bet
+        Place
       </button>
 
       <div className="bg-gray-800 p-4 rounded-md shadow-md">

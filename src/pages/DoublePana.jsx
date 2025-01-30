@@ -257,7 +257,7 @@ const DoublePana = () => {
         onClick={handlePlaceBet}
         className="w-full bg-green-500 hover:bg-green-600 py-2 rounded-lg font-bold text-sm mb-3 transition duration-300"
       >
-        Place Bet
+        Place
       </button>
 
       {/* Placed Bets Table */}

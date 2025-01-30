@@ -282,7 +282,7 @@ const SingleDigit = () => {
         onClick={handlePlaceBet}
         className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-md font-bold text-sm transition duration-300 mb-4"
       >
-        Place Bet
+        Place
       </button>
 
       {/* Placed Bets Table */}

@@ -257,7 +257,7 @@ const JodiDigit = () => {
         onClick={handlePlaceBet}
         className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-md text-sm font-medium transition duration-200 mb-4"
       >
-        Place Bet
+        Place
       </button>
 
       <div className="bg-gray-800 p-4 rounded-md shadow-md">
