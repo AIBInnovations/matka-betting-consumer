@@ -3,12 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddFunds = () => {
-  const navigate = useNavigate(); // For back navigation
+  const navigate = useNavigate();
   const [transactionId, setTransactionId] = useState('');
   const [receipt, setReceipt] = useState(null);
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [copySuccess, setCopySuccess] = useState(false);
+
+  const UPI_ID = "example@upi"; // Replace with actual UPI ID
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(UPI_ID);
+    setCopySuccess(true);
+    setTimeout(() => setCopySuccess(false), 2000);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +36,6 @@ const AddFunds = () => {
     formData.append('receipt', receipt);
   
     try {
-      // API call to submit fund request
       const token = localStorage.getItem('token');
       const response = await axios.post(
         'https://only-backend-je4j.onrender.com/api/wallet/add-funds',
@@ -35,7 +43,7 @@ const AddFunds = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
@@ -90,6 +98,20 @@ const AddFunds = () => {
           alt="Payment QR Code"
           className="w-full h-auto rounded-lg"
         />
+      </div>
+
+      {/* UPI ID Section */}
+      <div className="w-full max-w-md bg-gray-800 p-4 rounded-lg shadow-md text-center mb-4">
+        <h3 className="text-lg font-semibold mb-2">UPI ID for Payment</h3>
+        <div className="flex justify-between items-center bg-gray-700 px-3 py-2 rounded-lg">
+          <span className="text-yellow-400 font-bold">{UPI_ID}</span>
+          <button
+            onClick={handleCopy}
+            className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-300"
+          >
+            {copySuccess ? "Copied!" : "Copy"}
+          </button>
+        </div>
       </div>
 
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
