@@ -40,7 +40,7 @@ const SinglePana = () => {
         ]);
         
         setCoins(walletRes.data.walletBalance);
-        setPlacedBets(betsRes.data.bets.filter(bet => bet.gameName === "Single Pana" && bet.marketName === marketName));
+        setPlacedBets(betsRes.data.bets.filter(bet => bet.gameName === "Single Pana" && bet.marketName === marketName && bet.status === "pending"));
       } catch (error) {
         console.error('Error fetching data:', error);
         setError("Failed to fetch data!");
@@ -135,10 +135,10 @@ const SinglePana = () => {
       setCoins(coins - totalPoints);
       setBets([]);
       setError("");
-      alert("All bets placed successfully!");
+      alert("Submitted successfully!");
     } catch (error) {
       console.error("Error placing bets:", error);
-      setError("Failed to place bets!");
+      setError("Failed submitting!");
     }
   };
 
@@ -189,7 +189,7 @@ const SinglePana = () => {
           onClick={handleAddBet}
           className="col-span-1 bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-md font-bold text-sm transition duration-300"
         >
-          Add Bet
+          Proceed
         </button>
       </div>
 
@@ -206,7 +206,7 @@ const SinglePana = () => {
             <tr className="bg-gray-700 text-left">
               <th className="px-3 py-2">Single Pana</th>
               <th className="px-3 py-2">Points</th>
-              <th className="px-3 py-2">Bet Type</th>
+              <th className="px-3 py-2">Open/Close</th>
               <th className="px-3 py-2 text-right">Action</th>
             </tr>
           </thead>
@@ -235,7 +235,7 @@ const SinglePana = () => {
         onClick={handlePlaceBet}
         className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-md font-bold text-sm transition duration-300 mb-4"
       >
-        Place
+        Submit
       </button>
 
       <div className="bg-gray-800 p-4 rounded-md shadow-md">
@@ -245,7 +245,7 @@ const SinglePana = () => {
             <tr className="bg-gray-700 text-left">
               <th className="px-3 py-2">Single Pana</th>
               <th className="px-3 py-2">Points</th>
-              <th className="px-3 py-2">Bet Type</th>
+              <th className="px-3 py-2">Open/Close</th>
               <th className="px-3 py-2">Status</th>
             </tr>
           </thead>

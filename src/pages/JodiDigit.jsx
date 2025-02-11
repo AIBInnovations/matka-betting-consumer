@@ -48,7 +48,7 @@ const JodiDigit = () => {
       setCoins(walletData.data.walletBalance);
 
       const filteredBets = betsData.data.bets.filter(
-        (bet) => bet.marketName === marketName && bet.gameName === gameName
+        (bet) => bet.marketName === marketName && bet.gameName === gameName && bet.status === "pending"
       );
       setPlacedBets(filteredBets);
     } catch (error) {
@@ -135,10 +135,10 @@ const JodiDigit = () => {
       setBets([]);
       fetchWalletBalanceAndBets(); // Refetch data after placing bets
       setError("");
-      alert("All bets placed successfully!");
+      alert("Submitted successfully!");
     } catch (error) {
       console.error("Error placing bets:", error);
-      setError("Failed to place bets!");
+      setError("Failed submitting!");
     }
   };
 
@@ -212,7 +212,7 @@ const JodiDigit = () => {
           onClick={handleAddBet}
           className="col-span-1 bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-sm font-medium transition duration-200"
         >
-          Add Bet
+          Proceed
         </button>
       </div>
 
@@ -229,7 +229,7 @@ const JodiDigit = () => {
             <tr className="bg-gray-700">
               <th className="px-3 py-1">Jodi</th>
               <th className="px-3 py-1">Points</th>
-              <th className="px-3 py-1">Bet Type</th>
+              <th className="px-3 py-1">Open/Close</th>
               <th className="px-3 py-1 text-right">Action</th>
             </tr>
           </thead>
@@ -257,7 +257,7 @@ const JodiDigit = () => {
         onClick={handlePlaceBet}
         className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-md text-sm font-medium transition duration-200 mb-4"
       >
-        Place
+        Submit
       </button>
 
       <div className="bg-gray-800 p-4 rounded-md shadow-md">
@@ -267,7 +267,7 @@ const JodiDigit = () => {
             <tr className="bg-gray-700">
               <th className="px-3 py-1">Jodi</th>
               <th className="px-3 py-1">Points</th>
-              <th className="px-3 py-1">Bet Type</th>
+              <th className="px-3 py-1">Open/Close</th>
               <th className="px-3 py-1">Status</th>
             </tr>
           </thead>

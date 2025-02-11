@@ -59,8 +59,9 @@ const SingleDigit = () => {
           },
         }
       );
+      // console.log(response);
       const filteredBets = response.data.bets.filter(
-        (bet) => bet.marketName === marketName && bet.gameName === gameName
+        (bet) => bet.marketName === marketName && bet.gameName === gameName && bet.status === "pending"
       );
       setPlacedBets(filteredBets);
     } catch (error) {
@@ -155,10 +156,10 @@ const SingleDigit = () => {
       setBets([]);
       setError("");
       fetchPlacedBets(); // Refetch placed bets to update the table
-      alert("All bets placed successfully!");
+      alert("Submitted successfully!");
     } catch (error) {
-      console.error("Error placing bets:", error);
-      setError("Failed to place bets!");
+      console.error("Error submitting:", error);
+      setError("Failed submitting!");
     }
   };
 
@@ -234,7 +235,7 @@ const SingleDigit = () => {
           onClick={handleAddBet}
           className="col-span-1 bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-md font-bold text-sm transition duration-300"
         >
-          Add Bet
+          Proceed
         </button>
       </div>
 
@@ -247,13 +248,13 @@ const SingleDigit = () => {
 
       {/* Current Bets Table */}
       <div className="bg-gray-800 p-4 rounded-md shadow-md mb-4">
-        <h3 className="text-base font-bold mb-3">Current Bets</h3>
+        {/* <h3 className="text-base font-bold mb-3">Current Bets</h3> */}
         <table className="w-full table-auto mb-3 text-sm">
           <thead>
             <tr className="bg-gray-700 text-left">
               <th className="px-3 py-2">Digit</th>
               <th className="px-3 py-2">Points</th>
-              <th className="px-3 py-2">Bet Type</th>
+              <th className="px-3 py-2">Open/Close</th>
               <th className="px-3 py-2 text-right">Action</th>
             </tr>
           </thead>
@@ -282,18 +283,18 @@ const SingleDigit = () => {
         onClick={handlePlaceBet}
         className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-md font-bold text-sm transition duration-300 mb-4"
       >
-        Place
+        Submit
       </button>
 
       {/* Placed Bets Table */}
       <div className="bg-gray-800 p-4 rounded-md shadow-md">
-        <h3 className="text-base font-bold mb-3">Placed Bets</h3>
+        <h3 className="text-base font-bold mb-3">Submitted</h3>
         <table className="w-full table-auto text-sm">
           <thead>
             <tr className="bg-gray-700 text-left">
               <th className="px-3 py-2">Digit</th>
               <th className="px-3 py-2">Points</th>
-              <th className="px-3 py-2">Bet Type</th>
+              <th className="px-3 py-2">Open/Close</th>
               <th className="px-3 py-2">Status</th>
             </tr>
           </thead>

@@ -20,9 +20,7 @@ const WinHistory = () => {
       try {
         const { data } = await axios.get(
           "https://only-backend-je4j.onrender.com/api/bets/user",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
 
         const winningBets = data.bets.filter((bet) => bet.status === "won");
@@ -40,7 +38,6 @@ const WinHistory = () => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen p-4">
-      {/* Header */}
       <div className="flex items-center bg-gray-800 p-3 rounded-lg shadow-md mb-5">
         <button
           onClick={() => navigate(-1)}
@@ -64,7 +61,6 @@ const WinHistory = () => {
         <h2 className="text-lg font-bold">Win History</h2>
       </div>
 
-      {/* Content */}
       {loading ? (
         <div className="flex justify-center items-center">
           <div className="loader w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -76,10 +72,10 @@ const WinHistory = () => {
       ) : wins.length === 0 ? (
         <div className="text-center text-gray-400">No wins found.</div>
       ) : (
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-          <table className="w-full table-auto text-sm">
-            <thead>
-              <tr className="bg-gray-700">
+        <div className="overflow-auto max-h-[75vh]">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-700">
+              <tr>
                 <th className="p-2 text-left">Market</th>
                 <th className="p-2 text-left">Game</th>
                 <th className="p-2 text-left">Number</th>

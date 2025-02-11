@@ -43,7 +43,7 @@ const TriplePana = () => {
       ]);
 
       setCoins(walletResponse.data.walletBalance);
-      setPlacedBets(betsResponse.data.bets.filter(bet => bet.gameName === "Triple Pana" && bet.marketName === marketName));
+      setPlacedBets(betsResponse.data.bets.filter(bet => bet.gameName === "Triple Pana" && bet.marketName === marketName && bet.status === "pending"));
     } catch (error) {
       console.error("Error fetching data:", error);
       setError("Failed to fetch data!");
@@ -137,10 +137,10 @@ const TriplePana = () => {
       setCoins(coins - totalPoints);
       setBets([]);
       setError("");
-      alert("All bets placed successfully!");
+      alert("Submitted successfully!");
     } catch (error) {
       console.error("Error placing bets:", error);
-      setError("Failed to place bets!");
+      setError("Failed submitting!");
     }
   };
 
@@ -171,7 +171,7 @@ const TriplePana = () => {
         <input type="text" placeholder="Enter Triple Pana (3-digit)" value={input} onChange={(e) => setInput(e.target.value)} className="col-span-1 px-3 py-2 bg-white text-black rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600" />
         <input type="number" placeholder="Enter Points" value={points} onChange={(e) => setPoints(e.target.value)} className="col-span-1 px-3 py-2 bg-white text-black rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-600" />
         <button onClick={handleAddBet} className="col-span-1 bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-md font-bold text-sm transition duration-300">
-          Add Bet
+          Proceed
         </button>
       </div>
 
@@ -188,7 +188,7 @@ const TriplePana = () => {
             <tr className="bg-gray-700 text-left">
               <th className="px-3 py-2">Triple Pana</th>
               <th className="px-3 py-2">Points</th>
-              <th className="px-3 py-2">Bet Type</th>
+              <th className="px-3 py-2">Open/Close</th>
               <th className="px-3 py-2 text-right">Action</th>
             </tr>
           </thead>
@@ -210,7 +210,7 @@ const TriplePana = () => {
       </div>
 
       <button onClick={handlePlaceBet} className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-md font-bold text-sm transition duration-300 mb-4">
-        Place
+        Submit
       </button>
 
       <div className="bg-gray-800 p-4 rounded-md shadow-md">

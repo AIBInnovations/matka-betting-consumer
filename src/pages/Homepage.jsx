@@ -72,14 +72,11 @@ const HomePage = () => {
 
       {/* Markets Section */}
       <h2 className="text-xl font-bold text-center mb-4">All Markets</h2>
-
       {loading ? (
-        // Loader
         <div className="flex justify-center items-center min-h-[150px]">
           <div className="loader w-12 h-12 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : (
-        // Markets Display
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {allMarkets.length === 0 ? (
             <p className="text-center text-gray-400">No markets available.</p>
@@ -87,7 +84,8 @@ const HomePage = () => {
             allMarkets.map((market) => (
               <div
                 key={market._id}
-                className="relative p-3 bg-gray-800 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:scale-105"
+                className="relative p-3 bg-gray-800 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer"
+                onClick={() => market.isBettingOpen && navigate(`/play/${market.name}`)}
               >
                 <div className="flex justify-between items-center mb-1">
                   <h3 className="text-sm font-semibold">{market.name}</h3>
@@ -108,7 +106,10 @@ const HomePage = () => {
                 {market.isBettingOpen && (
                   <button
                     className="absolute bottom-3 right-3 bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm hover:bg-purple-700 transition-colors duration-300 ease-in-out"
-                    onClick={() => navigate(`/play/${market.name}`)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent the navigation from the container click
+                      navigate(`/play/${market.name}`);
+                    }}
                   >
                     <FontAwesomeIcon icon={faPlay} />
                   </button>
