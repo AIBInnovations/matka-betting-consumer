@@ -21,6 +21,8 @@ import Wallet from './pages/Wallet';
 import Help from './pages/Help';
 import GameRates from './pages/GameRates';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import MarketChart from './pages/MarketChart';
+
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/add-funds" element={<AddFunds />} />
           <Route path="/play/:marketName" element={<MarketPlay />} />
+          <Route path="/market-chart" element={<MarketChart />} />
           <Route path="/bets-history" element={<BetsHistory />} />
           <Route path="/single-digit" element={<SingleDigit />} />
           {/* <Route path="/single-digit/:marketName" element={<SingleDigit />} /> */}

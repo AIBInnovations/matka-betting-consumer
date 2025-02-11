@@ -82,7 +82,7 @@ const MarketPlay = () => {
 
         <button
           className="flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-3 rounded-md shadow-md text-sm font-semibold hover:scale-105 transition-transform"
-          onClick={() => navigate("/chart", { state: { marketName } })}
+          onClick={() => navigate("/market-chart", { state: { marketName } })}
         >
           <FontAwesomeIcon icon={faChartBar} />
           Chart
