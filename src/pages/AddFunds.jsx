@@ -31,11 +31,14 @@ const AddFunds = () => {
       return;
     }
   
+    // ✅ Ensure FormData is properly formatted
     const formData = new FormData();
     formData.append('transactionId', trimmedTransactionId);
     formData.append('amount', parsedAmount);
-    formData.append('type', type); // Added Type (Deposit/Withdrawal)
-    formData.append('receipt', receipt);
+    formData.append('type', type); // ✅ Added Transaction Type
+    formData.append('receipt', receipt); // ✅ Ensure file is added
+  
+    console.log("📢 Sending FormData:", formData); // ✅ Debugging Log
   
     try {
       const token = localStorage.getItem('token');
@@ -45,7 +48,7 @@ const AddFunds = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
@@ -57,11 +60,11 @@ const AddFunds = () => {
       setReceipt(null);
       setType('deposit'); // Reset to default after submission
     } catch (err) {
-      console.error('Error submitting fund request:', err);
+      console.error('❌ Error submitting fund request:', err.response);
       setMessage('');
       setError(err.response?.data?.message || 'Failed to submit fund request.');
     }
-  };  
+  };
 
   const handleReceiptChange = (e) => {
     setReceipt(e.target.files[0]);

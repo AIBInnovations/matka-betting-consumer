@@ -51,17 +51,24 @@ const Wallet = () => {
       setError("No token found, please log in again.");
       return;
     }
-
+  
     const transactionId = uuidv4();
     const receiptUrl = "https://example.com/receipt.jpg"; // Placeholder receipt URL
-
+  
     try {
+      console.log("📢 Sending Withdrawal Request:", {
+        transactionId,
+        amount,
+        type // ✅ Ensure type is included 
+      });
+  
       const response = await axios.post(
         'https://only-backend-je4j.onrender.com/api/wallet/add-funds',
         {
           transactionId,
           amount,
-          receiptUrl
+          receiptUrl,
+          type // ✅ Ensure this field is sent
         },
         {
           headers: {
@@ -70,7 +77,9 @@ const Wallet = () => {
           }
         }
       );
-
+  
+      console.log("✅ Withdrawal Request Success:", response.data);
+  
       if (response.data.transaction.status === "pending") {
         const newTransaction = {
           id: response.data.transaction._id,
@@ -80,20 +89,24 @@ const Wallet = () => {
         };
         setPendingRequests(prev => [...prev, newTransaction]);
       }
-
+  
       alert(`Transaction request for ${amount} coins has been logged as ${type}.`);
     } catch (error) {
-      console.error('Error posting transaction:', error);
+      console.error('❌ Error posting transaction:', error);
       setError("Failed to post transaction");
     }
-
-    const whatsappNumber = "7051098359";
-    const whatsappMessage = `I want to withdraw ${amount} coins.`;
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      whatsappMessage
-    )}`;
-    window.open(whatsappURL, "_blank");
+  
+    // ✅ Send WhatsApp Notification for Withdrawals
+    if (type === "withdrawal") {
+      const whatsappNumber = "7051098359";
+      const whatsappMessage = `I want to withdraw ${amount} coins.`;
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+        whatsappMessage
+      )}`;
+      window.open(whatsappURL, "_blank");
+    }
   };
+  
 
   const handleDeposit = () => {
     navigate('/add-funds'); // Redirect to the Add Funds page
@@ -110,7 +123,7 @@ const Wallet = () => {
       return;
     }
 
-    postTransaction("Withdrawal", withdrawAmount);
+    postTransaction("withdrawal", withdrawAmount);
     setAmount("");
   };
 
