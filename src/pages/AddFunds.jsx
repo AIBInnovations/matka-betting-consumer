@@ -7,6 +7,7 @@ const AddFunds = () => {
   const [transactionId, setTransactionId] = useState('');
   const [receipt, setReceipt] = useState(null);
   const [amount, setAmount] = useState('');
+  const [type, setType] = useState('deposit'); // Default selection to Deposit
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
@@ -25,14 +26,15 @@ const AddFunds = () => {
     const trimmedTransactionId = transactionId.trim();
     const parsedAmount = parseFloat(amount);
   
-    if (!trimmedTransactionId || isNaN(parsedAmount) || parsedAmount <= 0 || !receipt) {
-      setError('Amount, Transaction ID, and Receipt are required.');
+    if (!trimmedTransactionId || isNaN(parsedAmount) || parsedAmount <= 0 || !receipt || !type) {
+      setError('Amount, Transaction ID, Type (Deposit/Withdrawal), and Receipt are required.');
       return;
     }
   
     const formData = new FormData();
     formData.append('transactionId', trimmedTransactionId);
     formData.append('amount', parsedAmount);
+    formData.append('type', type); // Added Type (Deposit/Withdrawal)
     formData.append('receipt', receipt);
   
     try {
@@ -43,7 +45,7 @@ const AddFunds = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
           },
         }
       );
@@ -53,6 +55,7 @@ const AddFunds = () => {
       setTransactionId('');
       setAmount('');
       setReceipt(null);
+      setType('deposit'); // Reset to default after submission
     } catch (err) {
       console.error('Error submitting fund request:', err);
       setMessage('');
