@@ -56,11 +56,11 @@ const Register = () => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <h1 className="register-title">Create an Account</h1>
-        <p className="register-subtitle">Sign up to start playing</p>
-        <form onSubmit={handleRegister} className="register-form">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-900 to-gray-700 p-6">
+      <div className="bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-sm text-center">
+        <h1 className="text-2xl font-bold text-gray-300 mb-2">Create an Account</h1>
+        <p className="text-sm text-gray-400 mb-6">Sign up to start playing</p>
+        <form onSubmit={handleRegister} className="space-y-4">
           <div className="input-group">
             <input
               type="text"
@@ -68,9 +68,9 @@ const Register = () => {
               placeholder="Full Name"
               value={formData.name}
               onChange={handleChange}
-              className={`register-input ${errors.name ? 'error' : ''}`}
+              className={`register-input ${errors.name ? 'error' : ''} border-gray-600 text-gray-300 bg-gray-700 focus:ring-2 focus:ring-gray-500`}
             />
-            {errors.name && <p className="error-text">{errors.name}</p>}
+            {errors.name && <p className="error-text text-red-300">{errors.name}</p>}
           </div>
           <div className="input-group">
             <input
@@ -79,9 +79,9 @@ const Register = () => {
               placeholder="Email Address"
               value={formData.email}
               onChange={handleChange}
-              className={`register-input ${errors.email ? 'error' : ''}`}
+              className={`register-input ${errors.email ? 'error' : ''} border-gray-600 text-gray-300 bg-gray-700 focus:ring-2 focus:ring-gray-500`}
             />
-            {errors.email && <p className="error-text">{errors.email}</p>}
+            {errors.email && <p className="error-text text-red-300">{errors.email}</p>}
           </div>
           <div className="input-group">
             <input
@@ -90,9 +90,9 @@ const Register = () => {
               placeholder="Phone Number"
               value={formData.phoneNumber}
               onChange={handleChange}
-              className={`register-input ${errors.phoneNumber ? 'error' : ''}`}
+              className={`register-input ${errors.phoneNumber ? 'error' : ''} border-gray-600 text-gray-300 bg-gray-700 focus:ring-2 focus:ring-gray-500`}
             />
-            {errors.phoneNumber && <p className="error-text">{errors.phoneNumber}</p>}
+            {errors.phoneNumber && <p className="error-text text-red-300">{errors.phoneNumber}</p>}
           </div>
           <div className="input-group">
             <input
@@ -101,19 +101,22 @@ const Register = () => {
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
-              className={`register-input ${errors.password ? 'error' : ''}`}
+              className={`register-input ${errors.password ? 'error' : ''} border-gray-600 text-gray-300 bg-gray-700 focus:ring-2 focus:ring-gray-500`}
             />
-            {errors.password && <p className="error-text">{errors.password}</p>}
+            {errors.password && <p className="error-text text-red-300">{errors.password}</p>}
           </div>
-          <button type="submit" className="register-button gradient-button">
+          <button
+            type="submit"
+            className="w-full py-2 text-gray-800 bg-gray-500 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          >
             Register
           </button>
         </form>
-        <p className="register-footer">
+        <p className="text-sm text-gray-400 mt-4">
           Already have an account?{' '}
           <span
             onClick={() => navigate('/login')}
-            className="register-login-link"
+            className="font-bold text-gray-300 cursor-pointer hover:underline"
           >
             Log in
           </span>

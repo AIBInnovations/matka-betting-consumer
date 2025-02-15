@@ -32,10 +32,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-900 to-blue-400 p-6">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm text-center">
-        <h1 className="text-2xl font-bold text-blue-900 mb-2">Welcome Back</h1>
-        <p className="text-sm text-blue-700 mb-6">Log in to access your account</p>
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-900 to-gray-700 p-6">
+      <div className="bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-sm text-center">
+        <h1 className="text-2xl font-bold text-gray-300 mb-2">Welcome Back</h1>
+        <p className="text-sm text-gray-400 mb-6">Log in to access your account</p>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <input
@@ -43,40 +43,40 @@ const Login = () => {
               placeholder="Enter Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-300 bg-gray-700"
               required
             />
           </div>
           <div className="relative">
             <input
-              type={isPasswordVisible ? 'text' : 'password'} // Toggle between text and password type
+              type={isPasswordVisible ? 'text' : 'password'}
               placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-300 bg-gray-700"
               required
             />
             <button
               type="button"
               onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-              className="absolute inset-y-0 right-4 text-sm text-blue-500 hover:text-blue-700 focus:outline-none"
+              className="absolute inset-y-0 right-4 text-sm text-gray-500 hover:text-gray-300 focus:outline-none"
             >
               {isPasswordVisible ? 'Hide' : 'Show'}
             </button>
           </div>
           <button
             type="submit"
-            className="w-full py-2 text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-2 text-gray-800 bg-gray-500 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
             disabled={isLoading}
           >
             {isLoading ? 'Logging In...' : 'Log In'}
           </button>
         </form>
-        <p className="text-sm text-blue-700 mt-4">
+        <p className="text-sm text-gray-400 mt-4">
           Don't have an account?{' '}
           <span
             onClick={() => navigate('/register')}
-            className="font-bold text-blue-900 cursor-pointer hover:underline"
+            className="font-bold text-gray-300 cursor-pointer hover:underline"
           >
             Register Here
           </span>
