@@ -68,6 +68,7 @@ const CoinSettlements = () => {
                 <th className="p-2 text-left">Transaction ID</th>
                 <th className="p-2 text-left">Amount</th>
                 <th className="p-2 text-left">Status</th>
+                <th className="p-2 text-left">Type</th>
                 <th className="p-2 text-left">Date</th>
               </tr>
             </thead>
@@ -88,6 +89,7 @@ const CoinSettlements = () => {
                   >
                     {transaction.status}
                   </td>
+                  <td className="p-2">{transaction.type}</td>
                   <td className="p-2">
                     {new Date(transaction.createdAt).toLocaleDateString()}
                   </td>
