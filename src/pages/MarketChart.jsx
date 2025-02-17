@@ -15,7 +15,7 @@ const MarketChart = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const token = localStorage.getItem("authToken");
+        const token = localStorage.getItem("token");
 
         if (!token) {
           console.error("❌ No authentication token found! Redirecting to login...");
