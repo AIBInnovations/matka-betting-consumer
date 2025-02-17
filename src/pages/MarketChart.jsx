@@ -15,30 +15,30 @@ const MarketChart = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const token = localStorage.getItem("authToken"); // Get token from localStorage
-  
+        const token = localStorage.getItem("authToken");
+
         if (!token) {
-          console.error("No authentication token found!");
+          console.error("❌ No authentication token found! Redirecting to login...");
+          navigate("/login"); // Redirect user to login page if token is missing
           return;
         }
-  
+
         const response = await axios.get(
           `https://only-backend-je4j.onrender.com/api/admin/markets/get-results/${marketId}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Attach token in headers
+              Authorization: `Bearer ${token}`,
             },
           }
         );
         setResults(response.data);
       } catch (error) {
-        console.error("Error fetching market results:", error);
+        console.error("❌ Error fetching market results:", error);
       }
     };
-  
+
     fetchResults();
-  }, [marketId]);
-  
+  }, [marketId, navigate]);
 
   return (
     <div className="p-4 min-h-screen bg-gray-900 text-white">
