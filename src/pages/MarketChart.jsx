@@ -7,8 +7,7 @@ import { faArrowLeft, faCalendar } from "@fortawesome/free-solid-svg-icons";
 const MarketChart = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const marketId = location.state?.marketId || "defaultMarket";
-  const marketName = location.state?.marketName || "Unknown Market";
+  const marketId = location.state?.marketId || "MKT-1736254337623"; // Ensure a valid market ID
 
   const [results, setResults] = useState([]);
 
@@ -19,25 +18,37 @@ const MarketChart = () => {
 
         if (!token) {
           console.error("❌ No authentication token found! Redirecting to login...");
-          navigate("/login"); // Redirect user to login page if token is missing
+          navigate("/login");
           return;
         }
 
+        console.log("📢 Fetching Market Results for Market ID:", marketId);
+        console.log("🔑 Token being sent:", token);
+
         const response = await axios.get(
-          `https://only-backend-je4j.onrender.com/api/admin/markets/get-results/${marketId}`,
+          `https://only-backend-je4j.onrender.com/api/markets/get-results/${marketId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
+
+        console.log("✅ API Response:", response.data);
         setResults(response.data);
       } catch (error) {
-        console.error("❌ Error fetching market results:", error);
+        console.error(
+          "❌ Error fetching market results:",
+          error.response ? error.response.data : error.message
+        );
       }
     };
 
-    fetchResults();
+    if (marketId) {
+      fetchResults();
+    } else {
+      console.error("❌ Market ID is missing. Cannot fetch results.");
+    }
   }, [marketId, navigate]);
 
   return (
@@ -52,7 +63,7 @@ const MarketChart = () => {
 
       <h2 className="text-2xl font-bold text-center mb-4">
         <FontAwesomeIcon icon={faCalendar} className="mr-2" />
-        {marketName} - Market Chart
+        Market Chart
       </h2>
 
       <div className="bg-gray-800 p-4 rounded-md shadow-md overflow-x-auto">
@@ -66,14 +77,22 @@ const MarketChart = () => {
             </tr>
           </thead>
           <tbody>
-            {results.map((entry, index) => (
-              <tr key={index} className="text-green-400">
-                <td className="p-2 border-b border-gray-700">{entry.date}</td>
-                <td className="p-2 border-b border-gray-700">{entry.openNumber}</td>
-                <td className="p-2 border-b border-gray-700 font-bold">{entry.jodiResult}</td>
-                <td className="p-2 border-b border-gray-700">{entry.closeNumber}</td>
+            {results.length > 0 ? (
+              results.map((entry, index) => (
+                <tr key={index} className="text-green-400">
+                  <td className="p-2 border-b border-gray-700">{entry.date}</td>
+                  <td className="p-2 border-b border-gray-700">{entry.openNumber}</td>
+                  <td className="p-2 border-b border-gray-700 font-bold">{entry.jodiResult}</td>
+                  <td className="p-2 border-b border-gray-700">{entry.closeNumber}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" className="p-4 text-yellow-400">
+                  No results found for this market.
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
