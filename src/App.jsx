@@ -22,7 +22,8 @@ import Help from './pages/Help';
 import GameRates from './pages/GameRates';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import MarketChart from './pages/MarketChart';
-
+import HalfSangam from './pages/HalfSangam';
+import FullSangam from './pages/FullSangam';
 
 function App() {
   return (
@@ -58,6 +59,8 @@ function App() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/help" element={<Help />}/>
           <Route path="/game-rates" element={<GameRates />}/>
+          <Route path="/half-sangam" element={<HalfSangam />} />
+          <Route path="/full-sangam" element={<FullSangam />} />
         </Route>
       </Routes>
     </Router>
