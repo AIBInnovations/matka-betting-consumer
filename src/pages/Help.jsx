@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Help = () => {
   const navigate = useNavigate();
+  const [adminContact, setAdminContact] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
 
-  // Admin contact details
-  const adminContact = {
-    name: "Admin",
-    email: "admin@matkapro.com",
-    phone: "+91 98765 43210",
-    address: "123 Matka Street, Pro City, India",
-  };
+  useEffect(() => {
+    const fetchAdminContact = async () => {
+      try {
+        const response = await axios.get('https://only-backend-je4j.onrender.com/api/admin/platform-settings');
+        const { name, email, phone, address } = response.data.adminContact;
+        setAdminContact({ name, email, phone, address });
+      } catch (error) {
+        console.error('Failed to fetch admin contact details:', error);
+        // Handle error appropriately
+      }
+    };
+
+    fetchAdminContact();
+  }, []);
 
   return (
     <div className="bg-gray-900 text-white min-h-screen p-5">
@@ -73,9 +87,7 @@ const Help = () => {
       <div className="mt-5 bg-gray-800 p-5 rounded-lg shadow-lg">
         <h3 className="text-lg font-bold mb-3">Need Further Assistance?</h3>
         <p className="text-sm text-gray-300">
-          If you have any queries or need further assistance, feel free to
-          contact us at the above details. Our team is available 24/7 to help
-          you.
+          If you have any queries or need further assistance, feel free to contact us at the above details. Our team is available 24/7 to help you.
         </p>
         <button
           onClick={() => navigate("/contact")}
@@ -88,7 +100,7 @@ const Help = () => {
       {/* WhatsApp Button */}
       <div className="mt-5 flex justify-center">
         <a
-          href="https://wa.me/9876543210"
+          href={`https://wa.me/${adminContact.phone.replace(/\D/g, '')}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300"

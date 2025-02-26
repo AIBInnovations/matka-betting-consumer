@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,11 +11,26 @@ const AddFunds = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
+  const [upiId, setUpiId] = useState('');
+  const [qrCodeUrl, setQrCodeUrl] = useState('');
 
-  const UPI_ID = "example@upi"; // Replace with actual UPI ID
+  useEffect(() => {
+    const fetchPlatformSettings = async () => {
+      try {
+        const response = await axios.get('https://only-backend-je4j.onrender.com/api/admin/platform-settings');
+        setUpiId(response.data.upiId);
+        setQrCodeUrl(response.data.qrCodeUrl);
+      } catch (error) {
+        console.error('Failed to fetch platform settings:', error);
+        // Handle error appropriately
+      }
+    };
+
+    fetchPlatformSettings();
+  }, []);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(UPI_ID);
+    navigator.clipboard.writeText(upiId);
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 2000);
   };
@@ -31,14 +46,11 @@ const AddFunds = () => {
       return;
     }
   
-    // ✅ Ensure FormData is properly formatted
     const formData = new FormData();
     formData.append('transactionId', trimmedTransactionId);
     formData.append('amount', parsedAmount);
-    formData.append('type', type); // ✅ Added Transaction Type
-    formData.append('receipt', receipt); // ✅ Ensure file is added
-  
-    console.log("📢 Sending FormData:", formData); // ✅ Debugging Log
+    formData.append('type', type);
+    formData.append('receipt', receipt);
   
     try {
       const token = localStorage.getItem('token');
@@ -72,7 +84,6 @@ const AddFunds = () => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen p-5 flex flex-col items-center">
-      {/* Back Arrow and Title */}
       <div className="flex items-center w-full max-w-md mb-5">
         <button
           onClick={() => navigate(-1)}
@@ -97,20 +108,18 @@ const AddFunds = () => {
         <h2 className="text-xl font-bold ml-4">Add Coins</h2>
       </div>
 
-      {/* Image Section */}
       <div className="w-full max-w-md mb-4">
         <img
-          src="https://storage.googleapis.com/dara-c1b52.appspot.com/daras_ai/media/a3202e58-17ef-11ee-9a70-8e93953183bb/cleaned_qr.png"
+          src={qrCodeUrl}
           alt="Payment QR Code"
           className="w-full h-auto rounded-lg"
         />
       </div>
 
-      {/* UPI ID Section */}
       <div className="w-full max-w-md bg-gray-800 p-4 rounded-lg shadow-md text-center mb-4">
         <h3 className="text-lg font-semibold mb-2">UPI ID for Payment</h3>
         <div className="flex justify-between items-center bg-gray-700 px-3 py-2 rounded-lg">
-          <span className="text-yellow-400 font-bold">{UPI_ID}</span>
+          <span className="text-yellow-400 font-bold">{upiId}</span>
           <button
             onClick={handleCopy}
             className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition duration-300"
@@ -122,7 +131,6 @@ const AddFunds = () => {
 
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Amount Input */}
           <div>
             <label htmlFor="amount" className="block text-sm font-medium mb-1">
               Enter Number of Coins:
@@ -138,7 +146,6 @@ const AddFunds = () => {
             />
           </div>
 
-          {/* Transaction ID Input */}
           <div>
             <label htmlFor="transactionId" className="block text-sm font-medium mb-1">
               Settlement ID (UTR Number):
@@ -154,7 +161,6 @@ const AddFunds = () => {
             />
           </div>
 
-          {/* Receipt Upload */}
           <div>
             <label htmlFor="receipt" className="block text-sm font-medium mb-1">
               Upload Receipt (Required):
@@ -172,7 +178,6 @@ const AddFunds = () => {
             )}
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-semibold transition duration-300"
@@ -181,7 +186,6 @@ const AddFunds = () => {
           </button>
         </form>
 
-        {/* Success and Error Messages */}
         {message && (
           <p className="text-green-500 text-center mt-4 font-semibold">{message}</p>
         )}

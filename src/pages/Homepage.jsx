@@ -9,6 +9,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [allMarkets, setAllMarkets] = useState([]);
   const [loading, setLoading] = useState(true); // Loader state
+  const [bannerImageUrl, setBannerImageUrl] = useState('');
 
   // Helper function to format market results
   const formatMarketResult = (results) => {
@@ -22,20 +23,24 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const fetchAllMarkets = async () => {
+    const fetchData = async () => {
       try {
-        const { data } = await axios.get('https://only-backend-je4j.onrender.com/api/markets');
-        // Sort markets so that open betting markets come first
-        const sortedMarkets = data.sort((a, b) => b.isBettingOpen - a.isBettingOpen);
+        // Fetch all markets
+        const marketsResponse = await axios.get('https://only-backend-je4j.onrender.com/api/markets');
+        const sortedMarkets = marketsResponse.data.sort((a, b) => b.isBettingOpen - a.isBettingOpen);
         setAllMarkets(sortedMarkets);
+
+        // Fetch banner image URL
+        const settingsResponse = await axios.get('https://only-backend-je4j.onrender.com/api/admin/platform-settings');
+        setBannerImageUrl(settingsResponse.data.bannerImageUrl);
       } catch (error) {
-        console.error('Error fetching all markets:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false); // Stop loading once data is fetched or an error occurs
       }
     };
 
-    fetchAllMarkets();
+    fetchData();
   }, []);
 
   return (
@@ -43,7 +48,7 @@ const HomePage = () => {
       {/* Banner Section */}
       <div className="my-4 flex justify-center items-center overflow-hidden rounded-lg shadow-lg max-w-3xl mx-auto">
         <img
-          src="https://images.stockcake.com/public/8/f/3/8f3758d9-f547-4748-9f52-dad7837da75a_large/mystical-fiery-pot-stockcake.jpg"
+          src={bannerImageUrl || "https://via.placeholder.com/1000x400?text=Loading+Image"} // Fallback placeholder
           alt="Casino Banner"
           className="object-cover rounded-lg w-full max-h-48"
         />
@@ -95,46 +100,45 @@ const HomePage = () => {
                     }`}
                   >
                     {market.isBettingOpen ? 'Market is Open' : 'Market is Closed'}
-                  </span>
-                </div>
-                <div className="text-gray-300">
-                  <p className="text-xs">Open: {market.openTime} | Close: {market.closeTime}</p>
-                  <p className="text-sm mt-1 text-yellow-500 font-bold">
-                    {formatMarketResult(market.results)}
-                  </p>
-                </div>
-                {market.isBettingOpen && (
-                  <button
-                    className="absolute bottom-3 right-3 bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm hover:bg-purple-700 transition-colors duration-300 ease-in-out"
-                    onClick={(e) => {
-                      e.stopPropagation(); // Prevent the navigation from the container click
-                      navigate(`/play/${market.name}`);
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faPlay} />
-                  </button>
-                )}
-              </div>
-            ))
-          )}
-        </div>
+                  </span
+                  ></div>
+            <div className="text-gray-300">
+              <p className="text-xs">Open: {market.openTime} | Close: {market.closeTime}</p>
+              <p className="text-sm mt-1 text-yellow-500 font-bold">
+                {formatMarketResult(market.results)}
+              </p>
+            </div>
+            {market.isBettingOpen && (
+              <button
+                className="absolute bottom-3 right-3 bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm hover:bg-purple-700 transition-colors duration-300 ease-in-out"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent the navigation from the container click
+                  navigate(`/play/${market.name}`);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlay} />
+              </button>
+            )}
+          </div>
+        ))
       )}
-
-      {/* WhatsApp Floating Button */}
-      <a
-        href="https://wa.me/917051098359"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-600 p-4 rounded-full text-white shadow-lg hover:bg-green-700 transition-transform duration-300 transform hover:scale-110 flex items-center justify-center"
-        style={{
-          zIndex: 1000,
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-        }}
-      >
-        <FontAwesomeIcon icon={faWhatsapp} size="lg" />
-      </a>
     </div>
-  );
-};
+  )}
+
+  {/* WhatsApp Floating Button */}
+  <a
+    href="https://wa.me/917051098359"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="fixed bottom-6 right-6 bg-green-600 p-4 rounded-full text-white shadow-lg hover:bg-green-700 transition-transform duration-300 transform hover:scale-110 flex items-center justify-center"
+    style={{
+      zIndex: 1000,
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+    }}
+  >
+    <FontAwesomeIcon icon={faWhatsapp} size="lg" />
+  </a>
+</div>
+); };
 
 export default HomePage;
