@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
 
 const ResetPasswordPage = () => {
   const { token } = useParams(); // Extract token from URL
