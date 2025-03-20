@@ -48,7 +48,6 @@ const ResetPasswordPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#FCF9F2]">
-      <Header />
 
       {/* Reset Password Form */}
       <div className="flex-grow flex items-center justify-center my-16">
@@ -96,8 +95,6 @@ const ResetPasswordPage = () => {
           </form>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
