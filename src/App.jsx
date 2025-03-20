@@ -24,6 +24,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import MarketChart from './pages/MarketChart';
 import HalfSangam from './pages/HalfSangam';
 import FullSangam from './pages/FullSangam';
+import ResetPasswordPage from './pages/ResetPassword';
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -34,11 +36,14 @@ function App() {
           <>
           <Header />
           <HomePage />
+          
           </>
       } />
       <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />}/>
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         {/* Private Routes */}
         <Route element={<PrivateRoute />}>
